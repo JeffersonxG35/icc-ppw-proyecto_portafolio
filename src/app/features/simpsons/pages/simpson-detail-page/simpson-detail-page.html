@@ -1,0 +1,79 @@
+<section class="mx-auto max-w-4xl space-y-6">
+
+    <a
+        routerLink="/simpsons"
+        class="btn btn-ghost btn-sm"
+    >
+        ← Volver al listado
+    </a>
+
+    @if (characterResource.isLoading()) {
+    <div class="flex h-56 items-center justify-center">
+        <span class="loading loading-spinner loading-lg text-primary"></span>
+    </div>
+    }
+
+    @if (characterResource.error()) {
+    <div class="alert alert-error">
+        <span>No se pudo cargar el personaje.</span>
+    </div>
+    }
+
+    @if (characterResource.hasValue()) {
+
+    <article class="card border border-base-300 bg-base-100 shadow-sm">
+
+        <div class="card-body gap-6 md:flex-row">
+
+            <div class="mx-auto md:mx-0">
+
+                <img
+                    [src]="'https://cdn.thesimpsonsapi.com/500' + characterResource.value()!.portrait_path"
+                    [alt]="characterResource.value()!.name"
+                    class="h-56 w-56 rounded-2xl object-cover ring ring-base-300 ring-offset-2 ring-offset-base-100"
+                />
+
+            </div>
+
+            <div class="space-y-3">
+
+                <h2 class="text-3xl font-black tracking-tight">
+                    {{ characterResource.value()!.name }}
+                </h2>
+
+                <p class="text-base-content/80">
+                    <strong>Ocupacion:</strong>
+
+                    {{ characterResource.value()!.occupation || 'Sin ocupacion registrada' }}
+                </p>
+
+                <p class="text-base-content/80">
+                    <strong>Genero:</strong>
+
+                    {{ characterResource.value()!.gender || 'No registrado' }}
+                </p>
+
+                <p class="text-base-content/80">
+                    <strong>Edad:</strong>
+
+                    {{ characterResource.value()!.age ?? 'No registrada' }}
+                </p>
+
+                <span
+                    class="badge badge-lg"
+                    [class.badge-success]="characterResource.value()!.status === 'Alive'"
+                    [class.badge-error]="characterResource.value()!.status === 'Deceased'"
+                    [class.badge-warning]="characterResource.value()!.status !== 'Alive' && characterResource.value()!.status !== 'Deceased'"
+                >
+                    {{ characterResource.value()!.status || 'Desconocido' }}
+                </span>
+
+            </div>
+
+        </div>
+
+    </article>
+
+    }
+
+</section>

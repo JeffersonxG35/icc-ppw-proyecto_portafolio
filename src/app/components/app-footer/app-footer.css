@@ -1,0 +1,45 @@
+.footer {
+    margin-top: 4rem;
+    padding: 2rem 1.5rem;
+    border-top: 1px solid #e2e8f0;
+    background-color: #f8fafc;
+    font-family: system-ui, -apple-system, sans-serif; 
+    text-align: left;
+}
+
+.footer-title {
+    margin-top: 0;
+    margin-bottom: 1.25rem;
+    color: #1e293b;
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem; 
+}
+
+.pipe-item {
+    margin: 0;
+    color: #475569; 
+    font-size: 0.95rem;
+}
+
+
+.highlight-price {
+    color: #0f4c81;
+    font-weight: 600;
+}
+
+code {
+    background: #e2e8f0;
+    color: #334155;
+    padding: 0.2rem 0.5rem;
+    border-radius: 6px;
+    font-family: monospace;
+    font-size: 0.85rem;
+}
