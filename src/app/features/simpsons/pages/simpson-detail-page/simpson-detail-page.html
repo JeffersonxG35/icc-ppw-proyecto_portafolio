@@ -75,5 +75,24 @@
     </article>
 
     }
+    @if (authService.currentUser()) {
+  <!-- Solo visible para usuarios autenticados. -->
+  <button
+    class="btn btn-outline btn-sm"
+    [class.btn-warning]="isFavorite()"
+    (click)="toggleFavorite()"
+  >
+    @if (isFavorite()) {
+      ★ Guardado en favoritos
+    } @else {
+      ☆ Agregar a favoritos
+    }
+  </button>
+} @else {
+  <!-- Invita al usuario anonimo a autenticarse. -->
+  <a class="btn btn-ghost btn-sm" routerLink="/auth">
+    Inicia sesion para guardar favoritos
+  </a>
+}
 
 </section>

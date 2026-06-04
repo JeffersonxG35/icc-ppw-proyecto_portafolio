@@ -1,16 +1,68 @@
-<header class="fixed top-0 w-full z-50 border-b border-white/10 bg-surface/80 backdrop-blur-xl shadow-[0_4px_30px_rgba(0,0,0,0.1)]">
-  <div class="flex justify-between items-center h-20 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
-    <div class="flex items-center gap-3">
-      <span class="material-symbols-outlined text-primary-fixed-dim" style="font-variation-settings: 'FILL' 1;">terminal</span>
-      <span class="font-headline-lg text-headline-lg font-black tracking-tighter text-primary dark:text-primary">CYANIDE.DEV</span>
-    </div>
-    <nav class="hidden md:flex gap-8">
-      <a class="text-primary-fixed-dim font-bold relative after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-full after:h-0.5 after:bg-primary-fixed-dim after:shadow-[0_0_8px_#00dddd] transition-all duration-300" href="#">Home</a>
-      <a class="text-on-surface-variant font-medium hover:text-primary-fixed-dim transition-all duration-300" href="#team">Team</a>
-      <a class="text-on-surface-variant font-medium hover:text-primary-fixed-dim transition-all duration-300" href="#tech">Stack</a>
+﻿<header class="fixed inset-x-0 top-0 z-50 w-full block">
+  <div
+    class="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 transition-all duration-300"
+    [class.bg-[#0B0F19]/80]="scrolled()"
+    [class.backdrop-blur-xl]="scrolled()"
+    [class.shadow-2xl]="scrolled()"
+    [class.border-b]="scrolled()"
+    [class.border-white/[0.03]]="scrolled()"
+    [class.bg-transparent]="!scrolled()"
+    [class.border-b-transparent]="!scrolled()"
+  >
+    <a routerLink="/" class="flex items-center gap-2 font-display text-lg font-bold text-white no-underline">
+      <span class="grid h-10 w-10 place-items-center rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-lg shadow-cyan-500/10">
+        &lt;/&gt;
+      </span>
+      <span>
+        M<span class="bg-gradient-to-r from-cyan-400 to-sky-400 bg-clip-text text-transparent">&</span>J
+      </span>
+    </a>
+
+    <nav class="hidden items-center gap-2 lg:flex">
+      @for (section of sections; track section.id) {
+        <button
+          type="button"
+          (click)="navigateToSection(section.id)"
+          class="rounded-full px-3.5 py-2 text-sm text-slate-400 transition-all hover:bg-white/[0.04] hover:text-white bg-transparent border-none cursor-pointer font-medium"
+        >
+          {{ section.label }}
+        </button>
+      }
     </nav>
-    <button class="scale-95 active:scale-90 transition-transform px-6 py-2 bg-primary-fixed-dim text-on-primary-fixed font-bold rounded-full">
-      Contact
+
+    <button
+      type="button"
+      class="grid h-10 w-10 place-items-center rounded-xl border border-white/[0.08] text-slate-300 lg:hidden hover:bg-white/[0.02] bg-transparent"
+      (click)="toggleMenu()"
+      [attr.aria-label]="menuLabel()"
+      [attr.aria-expanded]="open()"
+    >
+      @if (!open()) {
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="h-5 w-5">
+          <path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      }
+      @if (open()) {
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="h-5 w-5">
+          <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      }
     </button>
   </div>
+
+  @if (open()) {
+    <div class="border-t border-white/[0.05] bg-[#0B0F19]/95 backdrop-blur-xl lg:hidden">
+      <div class="mx-auto flex max-w-7xl flex-col gap-1 px-5 py-4">
+        @for (section of sections; track section.id) {
+          <button
+            type="button"
+            (click)="navigateToSection(section.id)"
+            class="rounded-xl px-4 py-3 text-sm text-slate-400 transition-colors hover:bg-white/[0.04] hover:text-white w-full text-left bg-transparent border-none cursor-pointer font-medium"
+          >
+            {{ section.label }}
+          </button>
+        }
+      </div>
+    </div>
+  }
 </header>

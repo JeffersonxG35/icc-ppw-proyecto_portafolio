@@ -1,102 +1,214 @@
+<div class="w-full min-h-screen bg-[#0B0F19] text-slate-100 block">
+  <app-hero />
 
-
-<main class="grid-bg pt-20">
-  
-  <app-hero></app-hero>
-
-  <section class="py-section-gap px-margin-mobile max-w-container-max mx-auto" id="team">
-    <div class="text-center mb-16">
-      <h2 class="font-mono text-sm text-primary-fixed-dim uppercase tracking-[0.2em] mb-4">The Architects</h2>
-      <h3 class="text-3xl font-bold text-white">Mastering Web Performance</h3>
-    </div>
-    
-    <div class="grid md:grid-cols-2 gap-12 lg:gap-24">
-      <div class="glass-card group relative overflow-hidden rounded-xl cursor-pointer">
-        <div class="aspect-square relative overflow-hidden">
-          <img alt="Milton Chuqui Portrait" class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAb-Zhhye7Rsiaao6uT6MrE5x8YEXp9ty4l32E_JKXzQQi1Df4vLLWkPfHLF1qrCzh8-hgeN69iXBp6l1QSxzYUKbqEt5HRjenxz8F3bISlrHuatVFgfG58ZQgvp3EpmK6tGrC_iMd3aVYZ1cv-23CSItyTzRQJl2y_xv5-QFS10jMkvnrm28VsFm5TQsGVsmhYGX6_yEFwP-oVwpj_mhZ-ciGwWbqf09H0Zn9Lvy7DI9Fesfs33tu2lbLMkZVBdMYhYZiG9XfkJIH9"/>
-          <div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-80"></div>
-        </div>
-        <div class="p-8 absolute bottom-0 left-0 w-full">
-          <p class="font-mono text-xs text-primary-fixed-dim mb-1">Full-Stack Engineer</p>
-          <h4 class="text-2xl font-bold text-white mb-2">Milton Chuqui</h4>
-          <div class="flex gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-            <span class="material-symbols-outlined text-on-surface-variant hover:text-primary-fixed-dim">code</span>
-            <span class="material-symbols-outlined text-on-surface-variant hover:text-primary-fixed-dim">terminal</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="glass-card group relative overflow-hidden rounded-xl cursor-pointer">
-        <div class="aspect-square relative overflow-hidden">
-          <img alt="Jefferson Guerrero Portrait" class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDecXX-6mf_R33JmmI2Z-TW3BHyEeQtsqTt9rgAVTWX-USyx0WE94SYglSR_xhH-rmJVDtNfIfh_yUXjLJQt6kGIAztGpW3SfmXgmVBo1O_Vt6nMOKoly_Ez45fAwVf6cHehPC50HVI9a9bAXrq38ICDqmzDLPVzwticFvlle1U--EUvPJRu7U_Pj_8tNWlfYQ7G_Klun9ZlcoIG-UgfCi0DntPPK4dER6Kww4pOMUp2bia65pUs310vJTscWS_gNIlq_hwgKxyAtFt"/>
-          <div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-80"></div>
-        </div>
-        <div class="p-8 absolute bottom-0 left-0 w-full">
-          <p class="font-mono text-xs text-primary-fixed-dim mb-1">System Architect</p>
-          <h4 class="text-2xl font-bold text-white mb-2">Jefferson Guerrero</h4>
-          <div class="flex gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-            <span class="material-symbols-outlined text-on-surface-variant hover:text-primary-fixed-dim">hub</span>
-            <span class="material-symbols-outlined text-on-surface-variant hover:text-primary-fixed-dim">layers</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="py-section-gap px-margin-mobile max-w-container-max mx-auto border-t border-white/5" id="tech">
-    <div class="flex flex-col md:flex-row items-end justify-between mb-16 gap-4">
-      <div class="text-left">
-        <h2 class="font-mono text-sm text-primary-fixed-dim uppercase tracking-[0.2em] mb-4">Core Competencies</h2>
-        <h3 class="text-3xl font-bold text-white">Technical Stack</h3>
-      </div>
-      <p class="text-sm text-on-surface-variant max-w-sm">
-        Leveraging modern frameworks and high-precision languages to build scalable, resilient infrastructure.
+  <section id="nosotros" class="py-24 relative">
+    <div class="max-w-5xl mx-auto px-6">
+      <span class="text-xs font-bold uppercase tracking-widest text-cyan-400 block mb-3">Sobre Nosotros</span>
+      <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-6 tracking-tight max-w-3xl leading-tight">
+        Un equipo, una misión: construir gran software
+      </h2>
+      <p class="text-slate-400 text-base leading-relaxed max-w-4xl mb-14">
+        Combinamos nuestras fortalezas en frontend, backend y experiencia de usuario para entregar soluciones completas. Creemos en el aprendizaje continuo, la comunicación clara y el cuidado por cada detalle del producto.
       </p>
-    </div>
+      
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="backdrop-blur-md bg-white/[0.02] border border-white/[0.05] p-8 rounded-2xl relative group hover:border-cyan-500/20 transition-all duration-300">
+          <div class="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 mb-6">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-white mb-3">Objetivos</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">Crear software que resuelva problemas reales con calidad y escalabilidad.</p>
+        </div>
 
-    <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
-      <div class="glass-card flex flex-col items-center justify-center p-8 rounded-lg group">
-        <span class="material-symbols-outlined text-4xl mb-4 text-on-surface-variant group-hover:text-primary-fixed-dim transition-colors">javascript</span>
-        <span class="font-mono text-xs uppercase tracking-widest text-on-surface-variant group-hover:text-white transition-colors">JavaScript</span>
-      </div>
-      <div class="glass-card flex flex-col items-center justify-center p-8 rounded-lg group">
-        <span class="material-symbols-outlined text-4xl mb-4 text-on-surface-variant group-hover:text-primary-fixed-dim transition-colors">description</span>
-        <span class="font-mono text-xs uppercase tracking-widest text-on-surface-variant group-hover:text-white transition-colors">TypeScript</span>
-      </div>
-      <div class="glass-card flex flex-col items-center justify-center p-8 rounded-lg group">
-        <span class="material-symbols-outlined text-4xl mb-4 text-on-surface-variant group-hover:text-primary-fixed-dim transition-colors">terminal</span>
-        <span class="font-mono text-xs uppercase tracking-widest text-on-surface-variant group-hover:text-white transition-colors">Python</span>
-      </div>
-      <div class="glass-card flex flex-col items-center justify-center p-8 rounded-lg group">
-        <span class="material-symbols-outlined text-4xl mb-4 text-on-surface-variant group-hover:text-primary-fixed-dim transition-colors">coffee</span>
-        <span class="font-mono text-xs uppercase tracking-widest text-on-surface-variant group-hover:text-white transition-colors">Java</span>
-      </div>
-      <div class="glass-card flex flex-col items-center justify-center p-8 rounded-lg group">
-        <span class="material-symbols-outlined text-4xl mb-4 text-on-surface-variant group-hover:text-primary-fixed-dim transition-colors">change_history</span>
-        <span class="font-mono text-xs uppercase tracking-widest text-on-surface-variant group-hover:text-white transition-colors">Angular</span>
-      </div>
-      <div class="glass-card flex flex-col items-center justify-center p-8 rounded-lg group">
-        <span class="material-symbols-outlined text-4xl mb-4 text-on-surface-variant group-hover:text-primary-fixed-dim transition-colors">deployed_code</span>
-        <span class="font-mono text-xs uppercase tracking-widest text-on-surface-variant group-hover:text-white transition-colors">React</span>
-      </div>
-      <div class="glass-card flex flex-col items-center justify-center p-8 rounded-lg group">
-        <span class="material-symbols-outlined text-4xl mb-4 text-on-surface-variant group-hover:text-primary-fixed-dim transition-colors">html</span>
-        <span class="font-mono text-xs uppercase tracking-widest text-on-surface-variant group-hover:text-white transition-colors">HTML</span>
-      </div>
-      <div class="glass-card flex flex-col items-center justify-center p-8 rounded-lg group">
-        <span class="material-symbols-outlined text-4xl mb-4 text-on-surface-variant group-hover:text-primary-fixed-dim transition-colors">css</span>
-        <span class="font-mono text-xs uppercase tracking-widest text-on-surface-variant group-hover:text-white transition-colors">CSS</span>
-      </div>
-      <div class="glass-card flex flex-col items-center justify-center p-8 rounded-lg group">
-        <span class="material-symbols-outlined text-4xl mb-4 text-on-surface-variant group-hover:text-primary-fixed-dim transition-colors">palette</span>
-        <span class="font-mono text-xs uppercase tracking-widest text-on-surface-variant group-hover:text-white transition-colors">Tailwind</span>
-      </div>
-      <div class="glass-card flex flex-col items-center justify-center p-8 rounded-lg group">
-        <span class="material-symbols-outlined text-4xl mb-4 text-on-surface-variant group-hover:text-primary-fixed-dim transition-colors">dns</span>
-        <span class="font-mono text-xs uppercase tracking-widest text-on-surface-variant group-hover:text-white transition-colors">Node.js</span>
+        <div class="backdrop-blur-md bg-white/[0.02] border border-white/[0.05] p-8 rounded-2xl relative group hover:border-cyan-500/20 transition-all duration-300">
+          <div class="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 mb-6">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-2.533-3.326 10.56 10.56 0 00-4.213-.414m-1.411 5.212m1.411-5.212a4.125 4.125 0 100-8.25 4.125 4.125 0 000 8.25m-1.411 5.212a9.38 9.38 0 01-2.625.372 9.337 9.337 0 01-4.121-.952 4.125 4.125 0 012.533-3.326 10.56 10.56 0 014.213-.414m1.411 5.212V19.13m0-3.307a4.125 4.125 0 11-8.25 0 4.125 4.125 0 018.25 0z" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-white mb-3">Colaboración</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">Trabajamos en equipo, comunicando ideas y aprendiendo el uno del otro.</p>
+        </div>
+
+        <div class="backdrop-blur-md bg-white/[0.02] border border-white/[0.05] p-8 rounded-2xl relative group hover:border-cyan-500/20 transition-all duration-300">
+          <div class="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 mb-6">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-white mb-3">Pasión</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">Disfrutamos el proceso de construir y mejorar productos digitales.</p>
+        </div>
+
+        <div class="backdrop-blur-md bg-white/[0.02] border border-white/[0.05] p-8 rounded-2xl relative group hover:border-cyan-500/20 transition-all duration-300">
+          <div class="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 mb-6">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.83-5.83m0 0a2.999 2.999 0 03-4.185-4.183M15.17 11.42a3 3 0 00-4.183-4.184m0 0l-5.83-5.83A2.652 2.652 0 101.5 5.25l5.83 5.83m0 0a2.999 2.999 0 034.183 4.184m0-4.184m0 0l5.83 5.83m-5.83-5.83l-5.83 5.83" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-white mb-3">Calidad</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">Código limpio, mantenible y enfocado en la experiencia del usuario.</p>
+        </div>
       </div>
     </div>
   </section>
 
-</main>
+  <section id="tecnologias" class="py-24 relative">
+    <div class="max-w-5xl mx-auto px-6 text-center">
+      <span class="text-xs font-bold uppercase tracking-widest text-cyan-400 block mb-3">Stack</span>
+      <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-4 tracking-tight">Tecnologías y Habilidades</h2>
+      <p class="text-slate-400 text-sm md:text-base max-w-xl mx-auto mb-16 leading-relaxed">
+        Las herramientas y lenguajes que dominamos para llevar las ideas a producción.
+      </p>
+      
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-left">
+        @for (tech of technologies; track tech.name) {
+          <div class="backdrop-blur-md bg-white/[0.02] border border-white/[0.05] p-5 rounded-2xl flex items-center gap-4 hover:border-cyan-500/20 transition-all duration-200">
+            <div class="w-10 h-10 rounded-xl bg-cyan-500/10 font-bold text-sm text-cyan-400 flex items-center justify-center shrink-0">
+              {{ tech.initials }}
+            </div>
+            <p class="text-base font-semibold text-white tracking-wide">{{ tech.name }}</p>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
 
+  <section id="proyectos" class="py-24 relative">
+    <div class="max-w-5xl mx-auto px-6">
+      <span class="text-xs font-bold uppercase tracking-widest text-cyan-400 block mb-3">Portafolio</span>
+      <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-16 tracking-tight">Proyectos Destacados</h2>
+      
+      <div class="grid md:grid-cols-2 gap-8">
+        @for (project of projects; track project.name) {
+          <div class="backdrop-blur-md bg-white/[0.01] border border-white/[0.05] rounded-2xl overflow-hidden flex flex-col hover:border-cyan-500/20 transition-all duration-300 group">
+            @if (project.image) {
+              <div class="w-full h-56 overflow-hidden bg-[#121826] flex items-center justify-center relative border-b border-white/[0.05]">
+                <img [src]="project.image" [alt]="project.name" class="w-full h-full object-cover filter brightness-90 group-hover:brightness-100 group-hover:scale-[1.02] transition-all duration-500">
+              </div>
+            } @else {
+              <div class="w-full h-56 bg-gradient-to-br from-cyan-950/40 to-slate-900 border-b border-white/[0.05] relative flex items-center justify-center">
+                <span class="text-xs text-cyan-500/30 font-mono tracking-widest">⚡ [M&J DEVS]</span>
+              </div>
+            }
+            <div class="p-6 flex flex-col flex-grow">
+              <h3 class="text-xl font-bold text-white mb-3 group-hover:text-cyan-400 transition-colors tracking-wide">{{ project.name }}</h3>
+              <p class="text-slate-400 text-sm mb-6 leading-relaxed flex-grow">{{ project.description }}</p>
+              
+              <div class="flex flex-wrap gap-2 mb-6">
+                @for (tech of project.technologies; track tech) {
+                  <span class="text-xs px-3 py-1 bg-white/[0.02] border border-white/[0.05] text-slate-300 rounded-lg font-medium">{{ tech }}</span>
+                }
+              </div>
+              
+              @if (project.demo || project.repo) {
+                <div class="flex gap-5 border-t border-white/[0.05] pt-4 mt-auto text-xs font-semibold text-slate-400">
+                  @if (project.repo) {
+                    <a [href]="project.repo" class="flex items-center gap-1.5 hover:text-white transition-colors">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5" />
+                      </svg>
+                      Repositorio
+                    </a>
+                  }
+                  @if (project.demo) {
+                    <a [href]="project.demo" class="flex items-center gap-1.5 hover:text-cyan-400 transition-colors">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+                      </svg>
+                      Demo
+                    </a>
+                  }
+                </div>
+              }
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <section id="contacto" class="py-24 relative">
+    <div class="max-w-5xl mx-auto px-6">
+      <span class="text-xs font-bold uppercase tracking-widest text-cyan-400 block mb-3">Contacto</span>
+      <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-16 tracking-tight">Trabajemos juntos</h2>
+      
+      <div class="grid md:grid-cols-2 gap-8 items-start">
+        <div class="backdrop-blur-md bg-white/[0.01] border border-white/[0.05] p-8 rounded-2xl shadow-2xl">
+          <form (ngSubmit)="submitContactForm()" class="space-y-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-medium text-slate-300 mb-2">Nombre</label>
+                <input 
+                  type="text" 
+                  [(ngModel)]="contactForm.name" 
+                  name="name"
+                  placeholder="Tu nombre"
+                  class="w-full px-4 py-3 bg-[#0f1422] border border-white/[0.08] rounded-xl text-white placeholder-slate-600 focus:outline-none focus:border-cyan-500/40 text-sm transition-all"
+                  required>
+              </div>
+              <div>
+                <label class="block text-xs font-medium text-slate-300 mb-2">Correo electrónico</label>
+                <input 
+                  type="email" 
+                  [(ngModel)]="contactForm.email" 
+                  name="email"
+                  placeholder="tu@correo.com"
+                  class="w-full px-4 py-3 bg-[#0f1422] border border-white/[0.08] rounded-xl text-white placeholder-slate-600 focus:outline-none focus:border-cyan-500/40 text-sm transition-all"
+                  required>
+              </div>
+            </div>
+            <div>
+              <label class="block text-xs font-medium text-slate-300 mb-2">Mensaje</label>
+              <textarea 
+                [(ngModel)]="contactForm.message" 
+                name="message"
+                placeholder="Cuéntanos sobre tu proyecto..."
+                rows="5"
+                class="w-full px-4 py-3 bg-[#0f1422] border border-white/[0.08] rounded-xl text-white placeholder-slate-600 focus:outline-none focus:border-cyan-500/40 text-sm transition-all resize-none"
+                required></textarea>
+            </div>
+            <button 
+              type="submit"
+              class="inline-flex items-center gap-2 px-5 py-3 bg-gradient-to-r from-cyan-500 to-sky-500 hover:from-cyan-600 hover:to-sky-600 text-slate-950 text-xs font-bold rounded-xl shadow-lg transition-all duration-200 uppercase tracking-wider">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-4 h-4">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />
+              </svg>
+              Enviar mensaje
+            </button>
+          </form>
+        </div>
+
+        <div class="backdrop-blur-md bg-white/[0.01] border border-white/[0.05] p-8 rounded-2xl space-y-6">
+          <div>
+            <h3 class="text-lg font-bold text-white mb-2">Hablemos</h3>
+            <p class="text-sm text-slate-400">¿Tienes una idea o proyecto? Escríbenos por cualquiera de estos medios.</p>
+          </div>
+          
+          <div class="space-y-3 pt-2">
+            <div class="w-full flex items-center gap-3 px-4 py-3.5 bg-white/[0.01] border border-white/[0.05] rounded-xl text-sm text-slate-300">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4 text-cyan-400">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+              </svg>
+              equipo&#64;email.com
+            </div>
+            <div class="w-full flex items-center gap-3 px-4 py-3.5 bg-white/[0.01] border border-white/[0.05] rounded-xl text-sm text-slate-300">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="w-4 h-4 text-cyan-400">
+                <path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.464-1.11-1.464-.908-.62.069-.06.069-.06 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.577.688.479C19.138 20.161 22 16.416 22 12c0-5.523-4.477-10-10-10z"/>
+              </svg>
+              GitHub
+            </div>
+            <div class="w-full flex items-center gap-3 px-4 py-3.5 bg-white/[0.01] border border-white/[0.05] rounded-xl text-sm text-slate-300">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="w-4 h-4 text-cyan-400">
+                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+              </svg>
+              LinkedIn
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

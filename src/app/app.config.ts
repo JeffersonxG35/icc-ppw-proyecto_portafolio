@@ -9,5 +9,9 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes),
     provideHttpClient(withFetch()),
+    // Firebase providers are disabled until the Firebase project is configurado.
+    // provideFirebaseApp(() => initializeApp({...})),
+    // provideAuth(() => getAuth()),
+    // provideFirestore(() => getFirestore()),
   ],
 };
