@@ -53,7 +53,7 @@ export const developers: Developer[] = [
     slug: 'milton',
     name: 'Milton Chuqui',
     role: 'Frontend & UI Developer',
-    photo: '/developers/milton.jpg',
+    photo: '/assets/milton.jpg',
     tagline: 'Especialista en interfaces modernas y experiencias de usuario intuitivas',
     bio: 'Apasionado por crear interfaces elegantes y funcionales. Con experiencia en Angular, React y frameworks modernos.',
     education: [
@@ -93,7 +93,7 @@ export const developers: Developer[] = [
     slug: 'jefferson',
     name: 'Jefferson Guerrero',
     role: 'Full Stack Developer',
-    photo: '/developers/jefferson.jpg',
+    photo: '/assets/jefferson.jpg',
     tagline: 'Desarrollador versátil con experiencia en frontend y backend',
     bio: 'Especializado en crear soluciones completas, desde la interfaz hasta la base de datos. Apasionado por la arquitectura de software limpia.',
     education: [
@@ -149,21 +149,24 @@ export const projects: Project[] = [
     description: 'Sistema integral para administración de proyectos con dashboards en tiempo real',
     technologies: ['Angular', 'TypeScript', 'Tailwind'],
     demo: '#',
-    repo: '#'
+    repo: '#',
+    image: '/assets/project-1.jpg'
   },
   {
     name: 'E-commerce Moderno',
     description: 'Tienda en línea con carrito de compras y sistema de pagos integrado',
     technologies: ['React', 'JavaScript', 'Node.js'],
     demo: '#',
-    repo: '#'
+    repo: '#',
+    image: '/assets/project-2.jpg'
   },
   {
     name: 'Aplicación Móvil',
     description: 'Aplicación responsiva para gestionar tareas y colaboración en equipo',
     technologies: ['Angular', 'TypeScript', 'Firebase'],
     demo: '#',
-    repo: '#'
+    repo: '#',
+    image: '/assets/project-3.jpg'
   }
 ];
 

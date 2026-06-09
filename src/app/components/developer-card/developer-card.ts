@@ -34,7 +34,8 @@ export class DeveloperCardComponent {
     try {
       const current = this.router.url || '/';
       if (!this.developer || !this.developer.slug) return true;
-      return !current.endsWith('/' + this.developer.slug) && current !== ('/' + this.developer.slug);
+      const developerPath = `/developer/${this.developer.slug}`;
+      return !current.endsWith(developerPath) && current !== developerPath;
     } catch {
       return true;
     }

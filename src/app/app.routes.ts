@@ -1,10 +1,14 @@
 import { Routes } from '@angular/router';
-import { HomePage } from './features/home/pages/home-page/home-page';
-import { DeveloperProfilePage } from './features/developer/pages/developer-profile-page/developer-profile-page';
 
 export const routes: Routes = [
-  { path: '', component: HomePage },
-  { path: ':slug', component: DeveloperProfilePage },
-  // Catch-all redirect
+  {
+    path: '',
+    pathMatch: 'full',
+    loadComponent: () => import('./features/home/pages/home-page/home-page').then((m) => m.HomePage),
+  },
+  {
+    path: 'developer/:slug',
+    loadComponent: () => import('./features/developer/pages/developer-profile-page/developer-profile-page').then((m) => m.DeveloperProfilePage),
+  },
   { path: '**', redirectTo: '' },
 ];

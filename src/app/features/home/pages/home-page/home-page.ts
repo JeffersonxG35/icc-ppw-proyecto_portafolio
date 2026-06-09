@@ -1,9 +1,10 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { AppHeroComponent } from '../../../../components/app-hero/app-hero';
-import { developers, technologies, projects, timeline } from '../../../../core/services/data';
+import { developers, technologies, projects, timeline, Project } from '../../../../core/services/data';
+import { StrapiService } from '../../../../core/services/strapi.service';
 
 
 
@@ -17,10 +18,23 @@ import { developers, technologies, projects, timeline } from '../../../../core/s
 })
 
 export class HomePage {
+  private readonly strapiService = inject(StrapiService);
+
   developers = developers;
   technologies = technologies;
-  projects = projects;
+  localProjects = projects;
   timeline = timeline;
+
+  featuredProjects = computed<Project[]>(() =>
+    this.strapiService.featuredProjects().length ? this.strapiService.featuredProjects() : this.localProjects
+  );
+
+  services = [
+    { title: 'Desarrollo Web', description: 'Interfaces accesibles, responsivas y con alto rendimiento.' },
+    { title: 'Arquitectura de Software', description: 'Sistemas escalables con diseño modular y documentación clara.' },
+    { title: 'Cloud & DevOps', description: 'Implementaciones seguras en la nube con despliegues automatizados.' },
+    { title: 'Consultoría Técnica', description: 'Roadmaps, análisis de requerimientos y asesoría en producto digital.' },
+  ] as const;
 
   contactForm = {
     name: '',
@@ -29,6 +43,10 @@ export class HomePage {
   };
 
   submitted = false;
+
+  constructor() {
+    this.strapiService.loadFeaturedProjects().subscribe();
+  }
 
   scrollToSection(sectionId: string) {
     const element = document.getElementById(sectionId);
