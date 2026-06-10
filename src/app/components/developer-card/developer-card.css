@@ -1,0 +1,19 @@
+.developer-card {
+  border-radius: 1rem;
+  border: 1px solid rgba(255,255,255,0.03);
+  background: rgba(10,12,18,0.6);
+  padding: 1.25rem;
+  transition: box-shadow .25s, transform .2s;
+}
+
+.developer-card:hover { box-shadow: 0 10px 30px rgba(2,6,23,0.6); transform: translateY(-4px); }
+.card-inner { display: flex; gap: 1rem; align-items: center; }
+.card-left { flex: 0 0 64px; }
+.avatar { width: 64px; height: 64px; border-radius: 12px; object-fit: cover; border: 2px solid rgba(255,255,255,0.04); }
+.card-body { flex: 1; }
+.name { font-weight: 700; color: #fff; font-size: 1.125rem; }
+.role { color: #14b8a6; margin-top: 0.15rem; font-weight: 600; }
+.tagline { color: rgba(255,255,255,0.6); margin-top: .5rem; font-size: .95rem; }
+.cta { display: inline-flex; align-items: center; gap: .5rem; margin-top: .85rem; color: #fff; font-weight: 600; text-decoration: none; }
+.arrow { transform: translateX(0); transition: transform .15s; }
+.developer-card:hover .arrow { transform: translateX(4px); }

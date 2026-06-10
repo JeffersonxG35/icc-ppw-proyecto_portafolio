@@ -1,0 +1,88 @@
+﻿<header class="navbar fixed top-0 z-50 bg-[#0B0F19]/90 backdrop-blur-mdshadow-sm px-4">
+  <div class="navbar-start">
+    <a routerLink="/" class="btn btn-ghost text-xl font-black text-white"> M&J </a>
+  </div>
+
+  <!-- Desktop -->
+
+  <div class="navbar-center hidden lg:flex">
+    <ul class="menu menu-horizontal px-1">
+      @for (section of sections; track section.id) {
+        <li>
+          <button
+            type="button"
+            (click)="navigateToSection(section.id)"
+            class="font-semibold text-slate-300 hover:text-cyan-400 transition-colors"
+          >
+            {{ section.label }}
+          </button>
+        </li>
+      }
+    </ul>
+  </div>
+
+  <div class="navbar-center">
+    @if (currentUser() && role() === 'user') {
+      <a
+        routerLink="/mis-solicitudes"
+        class="btn btn-ghost btn-sm text-slate-300 hover:text-cyan-400"
+      >
+        Mis solicitudes
+      </a>
+    }
+  </div>
+  <div class="navbar-center">
+    @if (currentUser() && role() === 'admin') {
+      <a
+        routerLink="/solicitudes-recibidas"
+        class="btn btn-ghost btn-sm text-slate-300 hover:text-cyan-400"
+      >
+        Solicitudes Recibidas
+      </a>
+    }
+  </div>
+
+  <div class="navbar-end gap-2">
+    @if (currentUser()) {
+      <span class="hidden lg:block text-sm text-base-content/60">
+        {{ currentUser()?.email }}
+      </span>
+
+      <button class="btn btn-ghost btn-sm" (click)="logout()">Cerrar sesión</button>
+    } @else {
+      <a class="btn btn-primary btn-sm" routerLink="/auth"> Iniciar sesión </a>
+    }
+
+    <button
+      class="btn btn-ghost text-white lg:hidden backdrop-blur-mdshadow-sm px-4"
+      type="button"
+      (click)="toggleMenu()"
+    >
+      @if (!open()) {
+        ☰
+      } @else {
+        ✕
+      }
+    </button>
+  </div>
+</header>
+
+<!-- Menú móvil -->
+
+@if (open()) {
+  <div class="fixed top-16 left-0 right-0 z-40 bg-base-100 shadow lg:hidden">
+    <ul class="menu w-full">
+      @for (section of sections; track section.id) {
+        <li>
+          <button
+            type="button"
+            (click)="navigateToSection(section.id)"
+            class="font-semibold text-slate-300 hover:text-cyan-400"
+          >
+            {{ section.label }}
+          </button>
+        </li>
+      }
+    </ul>
+  </div>
+}

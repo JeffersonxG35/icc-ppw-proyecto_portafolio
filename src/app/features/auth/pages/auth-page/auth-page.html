@@ -1,0 +1,87 @@
+<section class="flex min-h-[80vh] items-center justify-center">
+  <div class="card w-full max-w-sm border border-base-300 bg-base-100 shadow-sm">
+    <div class="card-body gap-4">
+      <!-- El titulo cambia segun el modo activo. -->
+      <h2 class="text-2xl font-black tracking-tight">
+        @if (isLogin()) {
+          Iniciar sesion
+        } @else {
+          Crear cuenta
+        }
+      </h2>
+
+      <form [formGroup]="authForm" (ngSubmit)="onSubmit()" class="space-y-4">
+        <div class="form-control">
+          <label class="label" for="email">
+            <span class="label-text">Correo electronico</span>
+          </label>
+          <input
+            id="email"
+            type="email"
+            formControlName="email"
+            placeholder="usuario@ejemplo.com"
+            class="input input-bordered w-full"
+            [class.input-error]="authForm.get('email')?.invalid && authForm.get('email')?.touched"
+          />
+        </div>
+
+        <div class="form-control">
+          <label class="label" for="password">
+            <span class="label-text">Contrasena</span>
+          </label>
+          <input
+            id="password"
+            type="password"
+            formControlName="password"
+            placeholder="••••••"
+            class="input input-bordered w-full"
+            [class.input-error]="
+              authForm.get('password')?.invalid && authForm.get('password')?.touched
+            "
+          />
+        </div>
+
+        <!-- Error de Firebase mapeado a mensaje legible. -->
+        @if (errorMessage()) {
+          <div class="alert alert-error py-2 text-sm">
+            <span>{{ errorMessage() }}</span>
+          </div>
+        }
+
+        <button
+          type="submit"
+          class="btn btn-primary w-full"
+          [disabled]="authForm.invalid || isLoading()"
+        >
+          @if (isLoading()) {
+            <span class="loading loading-spinner loading-sm"></span>
+          } @else if (isLogin()) {
+            Ingresar
+          } @else {
+            Registrarse
+          }
+        </button>
+        <div class="divider">o</div>
+        <button
+          type="button"
+          class="btn btn-outline w-full"
+          (click)="loginWithGoogle()"
+          [disabled]="isLoading()"
+        >
+          Iniciar con Google
+        </button>
+      </form>
+
+      <!-- Enlace para alternar entre login y registro. -->
+      <p class="text-center text-sm text-base-content/60">
+        @if (isLogin()) {
+          ¿No tienes cuenta?
+          <button class="link link-primary" (click)="toggleMode()">Registrate aqui</button>
+        } @else {
+          ¿Ya tienes cuenta?
+          <button class="link link-primary" (click)="toggleMode()">Inicia sesion</button>
+        }
+      </p>
+    </div>
+  </div>
+</section>

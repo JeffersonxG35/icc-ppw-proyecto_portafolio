@@ -1,0 +1,8 @@
+/* Estilos mínimos, manteniendo fondo oscuro del proyecto */
+:host {
+  display: block;
+}
+
+.textarea {
+  resize: vertical;
+}
