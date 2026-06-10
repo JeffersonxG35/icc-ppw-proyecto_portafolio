@@ -1,41 +1,34 @@
-import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { AppHeroComponent } from '../../../../components/app-hero/app-hero';
-import { developers, technologies, projects, timeline, Project } from '../../../../core/services/data';
+import { technologies, timeline } from '../../../../core/services/data';
 import { StrapiService } from '../../../../core/services/strapi.service';
-
-
 
 @Component({
   selector: 'app-home-page',
   standalone: true,
   imports: [CommonModule, FormsModule, RouterModule, AppHeroComponent],
   templateUrl: './home-page.html',
-  styleUrl: './home-page.css',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  styleUrl: './home-page.css' // <-- Eliminamos ChangeDetectionStrategy para activar la reactividad automática
 })
-
-export class HomePage {
+export class HomePage implements OnInit {
+  // Inyección moderna con inject()
   private readonly strapiService = inject(StrapiService);
 
-  developers = developers;
+  // Datos estáticos
   technologies = technologies;
-  localProjects = projects;
   timeline = timeline;
 
-  featuredProjects = computed<Project[]>(() =>
-    this.strapiService.featuredProjects().length ? this.strapiService.featuredProjects() : this.localProjects
-  );
+  // Enlazamos directamente las Signals del servicio centralizado
+  servicios = this.strapiService.servicios;
+  proyectos = this.strapiService.proyectos;
+  programadores = this.strapiService.programadores;
+  loading = this.strapiService.loading;
+  error = this.strapiService.error;
 
-  services = [
-    { title: 'Desarrollo Web', description: 'Interfaces accesibles, responsivas y con alto rendimiento.' },
-    { title: 'Arquitectura de Software', description: 'Sistemas escalables con diseño modular y documentación clara.' },
-    { title: 'Cloud & DevOps', description: 'Implementaciones seguras en la nube con despliegues automatizados.' },
-    { title: 'Consultoría Técnica', description: 'Roadmaps, análisis de requerimientos y asesoría en producto digital.' },
-  ] as const;
-
+  // Formulario de contacto
   contactForm = {
     name: '',
     email: '',
@@ -44,8 +37,9 @@ export class HomePage {
 
   submitted = false;
 
-  constructor() {
-    this.strapiService.loadFeaturedProjects().subscribe();
+  ngOnInit(): void {
+    // Forzamos la carga de los datos de Strapi al inicializar
+    this.strapiService.loadAllContent();
   }
 
   scrollToSection(sectionId: string) {
@@ -62,5 +56,9 @@ export class HomePage {
         this.submitted = false;
       }, 3000);
     }
+  }
+
+  getImageUrl(url?: string): string {
+    return this.strapiService.resolveImageUrl(url);
   }
 }

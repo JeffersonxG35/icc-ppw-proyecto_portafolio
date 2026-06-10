@@ -1,10 +1,10 @@
 <div class="group developer-card motion-fade-up">
   <div class="card-inner">
     <div class="card-left">
-      <img [src]="developer.photo || developer.image || ('/assets/' + (developer.slug || '') + '.jpg')" 
-           alt="Retrato de {{ developer.name }}" 
-           class="avatar"
-           (error)="$any($event.target).src = getAvatarUrl(developer.name)">
+      <img [src]="developer.photo ? developer.photo : ( (developer.slug || '') + '.png')" 
+     alt="Retrato de {{ developer.name }}" 
+     class="avatar"
+     (error)="developer.photo ? null : $any($event.target).src = getAvatarUrl(developer.name)">
     </div>
     <div class="card-body">
       <h3 class="name">{{ developer.name }}</h3>

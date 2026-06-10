@@ -1,5 +1,5 @@
 <div class="w-full min-h-screen bg-[#0B0F19] text-slate-100 block">
-  <app-hero />
+  <app-hero [overrideDevelopers]="programadoresDinamicos()" />
 
   <section id="nosotros" class="py-24 relative">
     <div class="max-w-5xl mx-auto px-6">
@@ -31,26 +31,6 @@
           <h3 class="text-xl font-bold text-white mb-3">Colaboración</h3>
           <p class="text-slate-400 text-sm leading-relaxed">Trabajamos en equipo, comunicando ideas y aprendiendo el uno del otro.</p>
         </div>
-
-        <div class="backdrop-blur-md bg-white/[0.02] border border-white/[0.05] p-8 rounded-2xl relative group hover:border-cyan-500/20 transition-all duration-300">
-          <div class="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 mb-6">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
-            </svg>
-          </div>
-          <h3 class="text-xl font-bold text-white mb-3">Pasión</h3>
-          <p class="text-slate-400 text-sm leading-relaxed">Disfrutamos el proceso de construir y mejorar productos digitales.</p>
-        </div>
-
-        <div class="backdrop-blur-md bg-white/[0.02] border border-white/[0.05] p-8 rounded-2xl relative group hover:border-cyan-500/20 transition-all duration-300">
-          <div class="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 mb-6">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.83-5.83m0 0a2.999 2.999 0 03-4.185-4.183M15.17 11.42a3 3 0 00-4.183-4.184m0 0l-5.83-5.83A2.652 2.652 0 101.5 5.25l5.83 5.83m0 0a2.999 2.999 0 034.183 4.184m0-4.184m0 0l5.83 5.83m-5.83-5.83l-5.83 5.83" />
-            </svg>
-          </div>
-          <h3 class="text-xl font-bold text-white mb-3">Calidad</h3>
-          <p class="text-slate-400 text-sm leading-relaxed">Código limpio, mantenible y enfocado en la experiencia del usuario.</p>
-        </div>
       </div>
     </div>
   </section>
@@ -59,14 +39,22 @@
     <div class="max-w-5xl mx-auto px-6">
       <span class="text-xs font-bold uppercase tracking-widest text-cyan-400 block mb-3">Servicios</span>
       <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-8 tracking-tight">Qué entregamos</h2>
-      <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-        @for (service of services; track service.title) {
-          <div class="backdrop-blur-md bg-white/[0.02] border border-white/[0.05] p-7 rounded-[28px] shadow-lg shadow-cyan-500/5 hover:border-cyan-500/20 transition-all duration-300">
-            <h3 class="text-lg font-semibold text-white mb-3 tracking-wide">{{ service.title }}</h3>
-            <p class="text-slate-400 text-sm leading-relaxed">{{ service.description }}</p>
-          </div>
-        }
-      </div>
+      
+      @if (loading() && servicios().length === 0) {
+        <div class="text-center py-12">
+          <div class="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-cyan-400"></div>
+          <p class="text-slate-400 mt-4">Cargando servicios...</p>
+        </div>
+      } @else {
+        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          @for (servicio of servicios(); track servicio.id) {
+            <div class="backdrop-blur-md bg-white/[0.02] border border-white/[0.05] p-7 rounded-[28px] shadow-lg shadow-cyan-500/5 hover:border-cyan-500/20 transition-all duration-300">
+              <h3 class="text-lg font-semibold text-white mb-3 tracking-wide">{{ servicio?.title }}</h3>
+              <p class="text-slate-400 text-sm leading-relaxed">{{ servicio?.description }}</p>
+            </div>
+          }
+        </div>
+      }
     </div>
   </section>
 
@@ -96,40 +84,55 @@
       <span class="text-xs font-bold uppercase tracking-widest text-cyan-400 block mb-3">Portafolio</span>
       <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-16 tracking-tight">Proyectos Destacados</h2>
       
-      <div class="grid md:grid-cols-2 gap-8">
-        @for (project of featuredProjects(); track project.name) {
-          <div class="backdrop-blur-md bg-white/[0.01] border border-white/[0.05] rounded-2xl overflow-hidden flex flex-col hover:border-cyan-500/20 transition-all duration-300 group">
-            @if (project.image) {
-              <div class="w-full h-56 overflow-hidden bg-[#121826] flex items-center justify-center relative border-b border-white/[0.05]">
-                <img [src]="project.image" [alt]="project.name" class="w-full h-full object-cover filter brightness-90 group-hover:brightness-100 group-hover:scale-[1.02] transition-all duration-500">
-              </div>
-            } @else {
-              <div class="w-full h-56 bg-gradient-to-br from-cyan-950/40 to-slate-900 border-b border-white/[0.05] relative flex items-center justify-center">
-                <span class="text-xs text-cyan-500/30 font-mono tracking-widest">⚡ [M&J DEVS]</span>
-              </div>
-            }
-            <div class="p-6 flex flex-col flex-grow">
-              <h3 class="text-xl font-bold text-white mb-3 group-hover:text-cyan-400 transition-colors tracking-wide">{{ project.name }}</h3>
-              <p class="text-slate-400 text-sm mb-6 leading-relaxed flex-grow">{{ project.description }}</p>
+      @if (loading() && proyectos().length === 0) {
+        <div class="text-center py-12">
+          <div class="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-cyan-400"></div>
+          <p class="text-slate-400 mt-4">Cargando proyectos...</p>
+        </div>
+      } @else {
+        <div class="grid md:grid-cols-2 gap-8">
+          @for (proyecto of proyectos(); track proyecto.id) {
+            <div class="backdrop-blur-md bg-white/[0.01] border border-white/[0.05] rounded-2xl overflow-hidden flex flex-col hover:border-cyan-500/20 transition-all duration-300 group">
               
-              <div class="flex flex-wrap gap-2 mb-6">
-                @for (tech of project.technologies; track tech) {
-                  <span class="text-xs px-3 py-1 bg-white/[0.02] border border-white/[0.05] text-slate-300 rounded-lg font-medium">{{ tech }}</span>
+              @if (proyecto?.image && proyecto.image.length > 0 && proyecto.image[0]?.url) {
+                <div class="w-full h-56 overflow-hidden bg-[#121826] flex items-center justify-center relative border-b border-white/[0.05]">
+                  <img [src]="getImageUrl(proyecto.image[0].url)" 
+                       [alt]="proyecto?.name" 
+                       class="w-full h-full object-cover filter brightness-90 group-hover:brightness-100 group-hover:scale-[1.02] transition-all duration-500">
+                </div>
+              } @else {
+                <div class="w-full h-56 bg-gradient-to-br from-cyan-950/40 to-slate-900 border-b border-white/[0.05] relative flex items-center justify-center">
+                  <span class="text-xs text-cyan-500/30 font-mono tracking-widest">⚡ [M&J DEVS]</span>
+                </div>
+              }
+
+              <div class="p-6 flex flex-col flex-grow">
+                <h3 class="text-xl font-bold text-white mb-3 group-hover:text-cyan-400 transition-colors tracking-wide">
+                  {{ proyecto?.name }}
+                </h3>
+                <p class="text-slate-400 text-sm mb-6 leading-relaxed flex-grow">
+                  {{ proyecto?.description }}
+                </p>
+
+                @if (proyecto?.technologies) {
+                  <div class="flex flex-wrap gap-2 mb-6">
+                    <span class="text-xs px-3 py-1 bg-white/[0.02] border border-white/[0.05] text-cyan-400 rounded-lg font-medium">
+                      {{ proyecto.technologies }}
+                    </span>
+                  </div>
                 }
-              </div>
-              
-              @if (project.demo || project.repo) {
+                
                 <div class="flex gap-5 border-t border-white/[0.05] pt-4 mt-auto text-xs font-semibold text-slate-400">
-                  @if (project.repo) {
-                    <a [href]="project.repo" class="flex items-center gap-1.5 hover:text-white transition-colors">
+                  @if (proyecto?.githubUrl) {
+                    <a [href]="proyecto?.githubUrl" target="_blank" class="flex items-center gap-1.5 hover:text-white transition-colors">
                       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5" />
                       </svg>
                       Repositorio
                     </a>
                   }
-                  @if (project.demo) {
-                    <a [href]="project.demo" class="flex items-center gap-1.5 hover:text-cyan-400 transition-colors">
+                  @if (proyecto?.demoUrl) {
+                    <a [href]="proyecto?.demoUrl" target="_blank" class="flex items-center gap-1.5 hover:text-cyan-400 transition-colors">
                       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
                       </svg>
@@ -137,93 +140,99 @@
                     </a>
                   }
                 </div>
-              }
+              </div>
             </div>
-          </div>
-        }
-      </div>
+          }
+        </div>
+      }
     </div>
   </section>
 
-  <section id="contacto" class="py-24 relative">
+ <section id="contacto" class="py-24 relative">
     <div class="max-w-5xl mx-auto px-6">
       <span class="text-xs font-bold uppercase tracking-widest text-cyan-400 block mb-3">Contacto</span>
       <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-16 tracking-tight">Trabajemos juntos</h2>
       
       <div class="grid md:grid-cols-2 gap-8 items-start">
+        
         <div class="backdrop-blur-md bg-white/[0.01] border border-white/[0.05] p-8 rounded-2xl shadow-2xl">
           <form (ngSubmit)="submitContactForm()" class="space-y-6">
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label class="block text-xs font-medium text-slate-300 mb-2">Nombre</label>
-                <input 
-                  type="text" 
-                  [(ngModel)]="contactForm.name" 
-                  name="name"
-                  placeholder="Tu nombre"
-                  class="w-full px-4 py-3 bg-[#0f1422] border border-white/[0.08] rounded-xl text-white placeholder-slate-600 focus:outline-none focus:border-cyan-500/40 text-sm transition-all"
-                  required>
+                <input type="text" 
+                       [(ngModel)]="contactForm.name" 
+                       name="name" 
+                       placeholder="Tu nombre" 
+                       class="w-full px-4 py-3 bg-[#0f1422] border border-white/[0.08] rounded-xl text-white text-sm placeholder-slate-600 focus:outline-none focus:border-cyan-500/40" 
+                       required>
               </div>
               <div>
                 <label class="block text-xs font-medium text-slate-300 mb-2">Correo electrónico</label>
-                <input 
-                  type="email" 
-                  [(ngModel)]="contactForm.email" 
-                  name="email"
-                  placeholder="tu@correo.com"
-                  class="w-full px-4 py-3 bg-[#0f1422] border border-white/[0.08] rounded-xl text-white placeholder-slate-600 focus:outline-none focus:border-cyan-500/40 text-sm transition-all"
-                  required>
+                <input type="email" 
+                       [(ngModel)]="contactForm.email" 
+                       name="email" 
+                       placeholder="tu@correo.com" 
+                       class="w-full px-4 py-3 bg-[#0f1422] border border-white/[0.08] rounded-xl text-white text-sm placeholder-slate-600 focus:outline-none focus:border-cyan-500/40" 
+                       required>
               </div>
             </div>
             <div>
               <label class="block text-xs font-medium text-slate-300 mb-2">Mensaje</label>
-              <textarea 
-                [(ngModel)]="contactForm.message" 
-                name="message"
-                placeholder="Cuéntanos sobre tu proyecto..."
-                rows="5"
-                class="w-full px-4 py-3 bg-[#0f1422] border border-white/[0.08] rounded-xl text-white placeholder-slate-600 focus:outline-none focus:border-cyan-500/40 text-sm transition-all resize-none"
-                required></textarea>
+              <textarea [(ngModel)]="contactForm.message" 
+                        name="message" 
+                        rows="5" 
+                        placeholder="Cuéntanos sobre tu proyecto..." 
+                        class="w-full px-4 py-3 bg-[#0f1422] border border-white/[0.08] rounded-xl text-white text-sm placeholder-slate-600 focus:outline-none focus:border-cyan-500/40 resize-none" 
+                        required></textarea>
             </div>
-            <button 
-              type="submit"
-              class="inline-flex items-center gap-2 px-5 py-3 bg-gradient-to-r from-cyan-500 to-sky-500 hover:from-cyan-600 hover:to-sky-600 text-slate-950 text-xs font-bold rounded-xl shadow-lg transition-all duration-200 uppercase tracking-wider">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-4 h-4">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />
+            
+            <button type="submit" class="inline-flex items-center gap-2 px-5 py-3 bg-gradient-to-r from-cyan-500 to-sky-500 hover:from-cyan-600 hover:to-sky-600 text-slate-950 text-xs font-bold rounded-xl shadow-lg shadow-cyan-500/5 hover:shadow-cyan-500/10 transition-all uppercase tracking-wider">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-3.5 h-3.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 12 3.269 3.125A59.769 59.769 0 0 1 21.485 12 59.768 59.768 0 0 1 3.27 20.875L5.999 12Zm0 0h7.5" />
               </svg>
               Enviar mensaje
             </button>
           </form>
         </div>
-
-        <div class="backdrop-blur-md bg-white/[0.01] border border-white/[0.05] p-8 rounded-2xl space-y-6">
+        
+        <div class="backdrop-blur-md bg-white/[0.01] border border-white/[0.05] p-8 rounded-2xl space-y-6 flex flex-col justify-between self-stretch">
           <div>
             <h3 class="text-lg font-bold text-white mb-2">Hablemos</h3>
             <p class="text-sm text-slate-400">¿Tienes una idea o proyecto? Escríbenos por cualquiera de estos medios.</p>
           </div>
           
           <div class="space-y-3 pt-2">
-            <div class="w-full flex items-center gap-3 px-4 py-3.5 bg-white/[0.01] border border-white/[0.05] rounded-xl text-sm text-slate-300">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4 text-cyan-400">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+            <a href="mailto:equipo@email.com" 
+               class="w-full flex items-center gap-3 px-4 py-3.5 bg-white/[0.01] border border-white/[0.05] hover:border-cyan-500/30 rounded-xl text-sm text-slate-300 hover:text-white transition-all group no-underline">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4 text-cyan-400 group-hover:scale-105 transition-transform">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
               </svg>
-              equipo&#64;email.com
-            </div>
-            <div class="w-full flex items-center gap-3 px-4 py-3.5 bg-white/[0.01] border border-white/[0.05] rounded-xl text-sm text-slate-300">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="w-4 h-4 text-cyan-400">
-                <path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.464-1.11-1.464-.908-.62.069-.06.069-.06 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.577.688.479C19.138 20.161 22 16.416 22 12c0-5.523-4.477-10-10-10z"/>
+              <span>equipo&#64;email.com</span>
+            </a>
+
+            <a href="https://github.com" 
+               target="_blank" 
+               rel="noopener noreferrer" 
+               class="w-full flex items-center gap-3 px-4 py-3.5 bg-white/[0.01] border border-white/[0.05] hover:border-cyan-500/30 rounded-xl text-sm text-slate-300 hover:text-white transition-all group no-underline">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="text-cyan-400 group-hover:scale-105 transition-transform" viewBox="0 0 16 16">
+                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"/>
               </svg>
-              GitHub
-            </div>
-            <div class="w-full flex items-center gap-3 px-4 py-3.5 bg-white/[0.01] border border-white/[0.05] rounded-xl text-sm text-slate-300">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="w-4 h-4 text-cyan-400">
-                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+              <span>GitHub</span>
+            </a>
+
+            <a href="https://linkedin.com" 
+               target="_blank" 
+               rel="noopener noreferrer" 
+               class="w-full flex items-center gap-3 px-4 py-3.5 bg-white/[0.01] border border-white/[0.05] hover:border-cyan-500/30 rounded-xl text-sm text-slate-300 hover:text-white transition-all group no-underline">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="text-cyan-400 group-hover:scale-105 transition-transform" viewBox="0 0 16 16">
+                <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 14.867 0 14.234zm5.022 13.031V6.32H1.918v7.857h3.104zm-1.552-9.26c1.054 0 1.705-.698 1.705-1.567-.02-.888-.65-1.567-1.684-1.567-1.034 0-1.705.679-1.705 1.567 0 .869.651 1.568 1.664 1.568h.02zM12.339 14.27h3.103V8.815c0-2.924-1.562-4.284-3.64-4.284-1.68 0-2.423.931-2.842 1.58h.02v-1.79H6.32c.041.876 0 7.857 0 7.857h3.104V8.92c0-.422.03-.844.155-1.147.337-.84.11-1.71 1.411-1.71 1.716 0 2.404 1.307 2.404 3.227v5.277z"/>
               </svg>
-              LinkedIn
-            </div>
+              <span>LinkedIn</span>
+            </a>
           </div>
         </div>
+        
       </div>
     </div>
   </section>
-</div>
