@@ -11,7 +11,9 @@
       <h3 class="text-xs font-semibold uppercase tracking-[0.2em] text-cyan-400">Enlaces rápidos</h3>
       <ul class="mt-4 space-y-2.5 text-sm p-0 list-none">
         <li *ngFor="let link of quickLinks">
-          <a [href]="link.href" class="transition-colors hover:text-white text-slate-400 no-underline">{{ link.label }}</a>
+          <a [routerLink]="['/']" [fragment]="link.id" class="transition-colors hover:text-white text-slate-400 no-underline cursor-pointer">
+            {{ link.label }}
+          </a>
         </li>
       </ul>
     </div>

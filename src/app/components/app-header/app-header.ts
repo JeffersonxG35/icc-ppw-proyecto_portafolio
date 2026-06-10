@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -14,6 +14,8 @@ import { RouterLink } from '@angular/router';
   },
 })
 export class AppHeaderComponent {
+  private readonly router = inject(Router); 
+
   readonly brand = signal('M & J');
   readonly open = signal(false);
   readonly scrolled = signal(false);
@@ -38,12 +40,23 @@ export class AppHeaderComponent {
 
   navigateToSection(sectionId: string) {
     this.closeMenu();
+
+    if (this.router.url !== '/') {
+      this.router.navigate(['/']).then(() => {
+        this.executeScroll(sectionId);
+      });
+    } else {
+      this.executeScroll(sectionId);
+    }
+  }
+
+  private executeScroll(sectionId: string) {
     setTimeout(() => {
       const element = document.getElementById(sectionId);
       if (element) {
         element.scrollIntoView({ behavior: 'smooth' });
       }
-    }, 100);
+    }, 150);
   }
 
   handleScroll() {
