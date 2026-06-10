@@ -1,9 +1,8 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, computed, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { AppHeroComponent } from '../../../../components/app-hero/app-hero';
-import { technologies, timeline } from '../../../../core/services/data';
 import { StrapiService } from '../../../../core/services/strapi.service';
 
 @Component({
@@ -11,24 +10,47 @@ import { StrapiService } from '../../../../core/services/strapi.service';
   standalone: true,
   imports: [CommonModule, FormsModule, RouterModule, AppHeroComponent],
   templateUrl: './home-page.html',
-  styleUrl: './home-page.css' // <-- Eliminamos ChangeDetectionStrategy para activar la reactividad automática
+  styleUrl: './home-page.css'
 })
 export class HomePage implements OnInit {
-  // Inyección moderna con inject()
   private readonly strapiService = inject(StrapiService);
 
-  // Datos estáticos
-  technologies = technologies;
-  timeline = timeline;
+  technologies = [
+    { name: 'Angular', initials: 'NG' },
+    { name: 'React', initials: 'RC' },
+    { name: 'TypeScript', initials: 'TS' },
+    { name: 'Node.js', initials: 'NJ' },
+    { name: 'Python', initials: 'PY' },
+    { name: 'PostgreSQL', initials: 'PG' },
+    { name: 'MongoDB', initials: 'MG' },
+    { name: 'Docker', initials: 'DK' },
+    { name: 'Git', initials: 'GT' }
+  ];
 
-  // Enlazamos directamente las Signals del servicio centralizado
+  timeline = [
+    { year: '2023', event: 'Inicio del equipo' },
+    { year: '2024', event: 'Primeros proyectos' }
+  ];
+
   servicios = this.strapiService.servicios;
   proyectos = this.strapiService.proyectos;
   programadores = this.strapiService.programadores;
   loading = this.strapiService.loading;
   error = this.strapiService.error;
 
-  // Formulario de contacto
+  programadoresDinamicos = computed(() => {
+    return this.programadores().map(dev => ({
+      name: dev.name,
+      role: dev.role,
+      tagline: dev.tagline,
+      slug: dev.slug,
+      photo: dev.photo && dev.photo.length > 0 && dev.photo[0]?.url 
+        ? `http://localhost:1337${dev.photo[0].url}` 
+        : undefined,
+      contact: dev.contact
+    }));
+  });
+
   contactForm = {
     name: '',
     email: '',
@@ -38,7 +60,6 @@ export class HomePage implements OnInit {
   submitted = false;
 
   ngOnInit(): void {
-    // Forzamos la carga de los datos de Strapi al inicializar
     this.strapiService.loadAllContent();
   }
 

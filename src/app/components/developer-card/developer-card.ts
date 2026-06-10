@@ -25,12 +25,32 @@ export class DeveloperCardComponent {
     };
   };
 
-  getAvatarUrl(name?: string) {
-    return 'https://ui-avatars.com/api/?background=0f172a&color=22d3ee&bold=true&name=' + encodeURIComponent(name || '');
-  }
+  // Input para identificar si está en modo perfil (imagen más grande)
+  @Input() profileMode: boolean = false;
+
   private router = inject(Router);
 
-  get showCTA() {
+  // Obtener la URL de la foto, priorizando 'photo' sobre 'image'
+  getPhotoUrl(): string {
+    // Prioridad 1: photo (desde Strapi)
+    if (this.developer.photo) {
+      return this.developer.photo;
+    }
+    
+    // Prioridad 2: image (legacy)
+    if (this.developer.image) {
+      return this.developer.image;
+    }
+    
+    // Fallback: avatar generado con iniciales
+    return this.getAvatarUrl(this.developer.name);
+  }
+
+  getAvatarUrl(name?: string): string {
+    return 'https://ui-avatars.com/api/?background=0f172a&color=22d3ee&bold=true&name=' + encodeURIComponent(name || '');
+  }
+
+  get showCTA(): boolean {
     try {
       const current = this.router.url || '/';
       if (!this.developer || !this.developer.slug) return true;
@@ -41,4 +61,3 @@ export class DeveloperCardComponent {
     }
   }
 }
-

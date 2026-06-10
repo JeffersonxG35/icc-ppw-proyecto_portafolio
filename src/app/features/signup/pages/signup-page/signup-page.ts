@@ -11,15 +11,7 @@ import { emailUniqueValidator } from '../../validators/email-unique.validator';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SignupPage {
-  // emailControl = new FormControl(
-  //     '',
-  //     [Validators.required, Validators.email]//Validadores Sincronos
-  // );
-
-  // get email() {
-  //   return this.emailControl;
-  // }
-
+ 
   private fb = inject(FormBuilder);
 
   form = this.fb.group({
@@ -44,7 +36,6 @@ private router = inject(Router);
 
 onSubmit() {
   if (this.form.invalid) {
-    // Marcar todos los campos como touched para mostrar errores
     this.form.markAllAsTouched();
 
     return;
@@ -52,7 +43,6 @@ onSubmit() {
 
   console.log('Datos del formulario:', this.form.value);
   
-  // Por ahora, navegar a home
   this.router.navigate(['/']);
 }
 }
