@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
+import { AuthService } from '../../core/services/auth';
 
 @Component({
   selector: 'app-header',
@@ -14,8 +15,10 @@ import { Router, RouterLink } from '@angular/router';
   },
 })
 export class AppHeaderComponent {
-  private readonly router = inject(Router); 
+  private authService = inject(AuthService);
 
+  role = this.authService.role;
+  private router = inject(Router);
   readonly brand = signal('M & J');
   readonly open = signal(false);
   readonly scrolled = signal(false);
@@ -30,6 +33,15 @@ export class AppHeaderComponent {
     { id: 'contacto', label: 'Contacto' },
   ] as const;
 
+  // El signal del servicio: null = no autenticado, User = autenticado.
+  currentUser = this.authService.currentUser;
+
+  logout() {
+    this.authService.logout().subscribe(() => {
+      // Redirige al login despues de cerrar sesion.
+      this.router.navigate(['/login']);
+    });
+  }
   toggleMenu() {
     this.open.update((value) => !value);
   }
@@ -40,23 +52,12 @@ export class AppHeaderComponent {
 
   navigateToSection(sectionId: string) {
     this.closeMenu();
-
-    if (this.router.url !== '/') {
-      this.router.navigate(['/']).then(() => {
-        this.executeScroll(sectionId);
-      });
-    } else {
-      this.executeScroll(sectionId);
-    }
-  }
-
-  private executeScroll(sectionId: string) {
     setTimeout(() => {
       const element = document.getElementById(sectionId);
       if (element) {
         element.scrollIntoView({ behavior: 'smooth' });
       }
-    }, 150);
+    }, 100);
   }
 
   handleScroll() {

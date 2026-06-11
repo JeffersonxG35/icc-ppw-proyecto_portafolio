@@ -1,0 +1,60 @@
+<div class="min-h-screen bg-[#0B0F19] text-white p-8 pt-20">
+  <h1 class="text-3xl font-bold text-cyan-400 mb-6">Solicitudes Recibidas</h1>
+  @if (requests().length === 0) {
+    <div class="alert">No hay solicitudes para mostrar.</div>
+  } @else {
+    <div class="space-y-4">
+      @for (request of requests(); track request.id) {
+        <div class="bg-slate-900 border border-slate-800 rounded-xl p-6">
+          <p class="text-sm text-slate-300 mb-2">
+            <strong>Correo:</strong> {{ request.userEmail }}
+          </p>
+          <p class="text-sm text-slate-300 mb-4">
+            <strong>Descripción:</strong> {{ request.projectDescription }}
+          </p>
+          <div class="mb-4">
+            <label class="block text-xs text-slate-400 mb-2">Respuesta</label>
+            <textarea
+              rows="4"
+              class="textarea textarea-bordered w-full bg-slate-950 text-white"
+              [value]="responses()[request.id!] || ''"
+              (input)="request.id && setResponse(request.id, $any($event.target).value)"
+              placeholder="Escribe tu respuesta..."
+            ></textarea>
+          </div>
+          <div class="flex items-center justify-between">
+            <div>
+              <span
+                class="badge"
+                [class.badge-warning]="request.status === 'Pendiente'"
+                [class.badge-info]="request.status === 'En proceso'"
+                [class.badge-success]="request.status === 'Respondida'"
+              >
+                {{ request.status }}
+              </span>
+
+              <select
+                class="select select-bordered select-sm bg-slate-950 text-white"
+                [value]="request.status"
+                (change)="changeStatus(request.id!, $any($event.target).value)"
+              >
+                <option value="Pendiente">Pendiente</option>
+                <option value="En proceso">En proceso</option>
+                <option value="Respondida">Respondida</option>
+              </select>
+            </div>
+            <div class="flex items-center gap-2">
+              <button
+                class="btn btn-primary"
+                (click)="saveResponse(request.id!)"
+                [disabled]="request.status === 'Respondida'"
+              >
+                Guardar respuesta
+              </button>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  }
+</div>

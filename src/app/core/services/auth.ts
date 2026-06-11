@@ -1,39 +1,65 @@
-import { computed, Injectable, signal } from '@angular/core';
-import { of } from 'rxjs';
+import { computed, inject, Injectable, signal } from '@angular/core';
+import {
+  Auth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged,
+  User,
+  GoogleAuthProvider,
+  signInWithPopup,
+} from '@angular/fire/auth';
+import { from, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  readonly user = signal<null>(null);
-  readonly currentUser = signal<null>(null);
-  readonly role = computed<'admin' | 'user' | null>(() => null);
+  private auth = inject(Auth);
 
-  login(email: string, password: string) {
-    console.warn('Firebase no está configurado. login() devuelve null.');
-    return of(null);
+  // Signal que almacena el usuario autenticado actual
+  readonly currentUser = signal<User | null>(null);
+
+  // Computed para rol del usuario (expandible en el futuro)
+  readonly role = computed<'admin' | 'user' | null>(() => {
+    return this.currentUser() ? 'user' : null;
+  });
+
+  constructor() {
+    // Escuchar cambios en el estado de autenticación
+    onAuthStateChanged(this.auth, (user) => {
+      this.currentUser.set(user);
+    });
   }
 
-  register(email: string, password: string) {
-    console.warn('Firebase no está configurado. register() devuelve null.');
-    return of(null);
+  // Inicia sesión con email y contraseña
+  login(email: string, password: string): Observable<User> {
+    return from(signInWithEmailAndPassword(this.auth, email, password)).pipe(
+      map((credential) => credential.user),
+    );
   }
 
-  loginWithGoogle() {
-    console.warn('Firebase no está configurado. loginWithGoogle() devuelve null.');
-    return of(null);
+  // Registra un nuevo usuario con email y contraseña
+  register(email: string, password: string): Observable<User> {
+    return from(createUserWithEmailAndPassword(this.auth, email, password)).pipe(
+      map((credential) => credential.user),
+    );
   }
 
-  logout() {
-    console.warn('Firebase no está configurado. logout() devuelve null.');
-    return of(null);
+  // Inicia sesión con Google
+  loginWithGoogle(): Observable<User> {
+    const provider = new GoogleAuthProvider();
+    return from(signInWithPopup(this.auth, provider)).pipe(map((credential) => credential.user));
   }
 
+  // Cierra sesión
+  logout(): Observable<void> {
+    return from(signOut(this.auth));
+  }
+
+  // Obtiene el UID del usuario actual
   get uid(): string | null {
-    return null;
-  }
-
-  isAdmin() {
-    return of(false);
+    return this.currentUser()?.uid ?? null;
   }
 }

@@ -1,68 +1,88 @@
-﻿<header class="fixed inset-x-0 top-0 z-50 w-full block">
-  <div
-    class="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 transition-all duration-300"
-    [class.bg-[#0B0F19]/80]="scrolled()"
-    [class.backdrop-blur-xl]="scrolled()"
-    [class.shadow-2xl]="scrolled()"
-    [class.border-b]="scrolled()"
-    [class.border-white/[0.03]]="scrolled()"
-    [class.bg-transparent]="!scrolled()"
-    [class.border-b-transparent]="!scrolled()"
-  >
-    <a routerLink="/" class="flex items-center gap-2 font-display text-lg font-bold text-white no-underline">
-      <span class="grid h-10 w-10 place-items-center rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-lg shadow-cyan-500/10">
-        &lt;/&gt;
-      </span>
-      <span>
-        M<span class="bg-gradient-to-r from-cyan-400 to-sky-400 bg-clip-text text-transparent">&</span>J
-      </span>
-    </a>
-
-    <nav class="hidden items-center gap-2 lg:flex">
-      @for (section of sections; track section.id) {
-        <button
-          type="button"
-          (click)="navigateToSection(section.id)"
-          class="rounded-full px-3.5 py-2 text-sm text-slate-400 transition-all hover:bg-white/[0.04] hover:text-white bg-transparent border-none cursor-pointer font-medium"
-        >
-          {{ section.label }}
-        </button>
-      }
-    </nav>
-
-    <button
-      type="button"
-      class="grid h-10 w-10 place-items-center rounded-xl border border-white/[0.08] text-slate-300 lg:hidden hover:bg-white/[0.02] bg-transparent"
-      (click)="toggleMenu()"
-      [attr.aria-label]="menuLabel()"
-      [attr.aria-expanded]="open()"
-    >
-      @if (!open()) {
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="h-5 w-5">
-          <path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-        </svg>
-      }
-      @if (open()) {
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="h-5 w-5">
-          <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-        </svg>
-      }
-    </button>
+﻿<header class="navbar fixed top-0 z-50 bg-[#0B0F19]/90 backdrop-blur-mdshadow-sm px-4">
+  <div class="navbar-start">
+    <a routerLink="/" class="btn btn-ghost text-xl font-black text-white"> M&J </a>
   </div>
 
-  @if (open()) {
-    <div class="border-t border-white/[0.05] bg-[#0B0F19]/95 backdrop-blur-xl lg:hidden">
-      <div class="mx-auto flex max-w-7xl flex-col gap-1 px-5 py-4">
-        @for (section of sections; track section.id) {
+  <!-- Desktop -->
+
+  <div class="navbar-center hidden lg:flex">
+    <ul class="menu menu-horizontal px-1">
+      @for (section of sections; track section.id) {
+        <li>
           <button
             type="button"
             (click)="navigateToSection(section.id)"
-            class="rounded-xl px-4 py-3 text-sm text-slate-400 transition-colors hover:bg-white/[0.04] hover:text-white w-full text-left bg-transparent border-none cursor-pointer font-medium"
+            class="font-semibold text-slate-300 hover:text-cyan-400 transition-colors"
           >
             {{ section.label }}
           </button>
-        }
-      </div>
-    </div>
-  }
+        </li>
+      }
+    </ul>
+  </div>
+
+  <div class="navbar-center">
+    @if (currentUser() && role() === 'user') {
+      <a
+        routerLink="/mis-solicitudes"
+        class="btn btn-ghost btn-sm text-slate-300 hover:text-cyan-400"
+      >
+        Mis solicitudes
+      </a>
+    }
+  </div>
+  <div class="navbar-center">
+    @if (currentUser() && role() === 'admin') {
+      <a
+        routerLink="/solicitudes-recibidas"
+        class="btn btn-ghost btn-sm text-slate-300 hover:text-cyan-400"
+      >
+        Solicitudes Recibidas
+      </a>
+    }
+  </div>
+
+  <div class="navbar-end gap-2">
+    @if (currentUser()) {
+      <span class="hidden lg:block text-sm text-base-content/60">
+        {{ currentUser()?.email }}
+      </span>
+
+      <button class="btn btn-ghost btn-sm" (click)="logout()">Cerrar sesión</button>
+    } @else {
+      <a class="btn btn-primary btn-sm" routerLink="/auth"> Iniciar sesión </a>
+    }
+
+    <button
+      class="btn btn-ghost text-white lg:hidden backdrop-blur-mdshadow-sm px-4"
+      type="button"
+      (click)="toggleMenu()"
+    >
+      @if (!open()) {
+        ☰
+      } @else {
+        ✕
+      }
+    </button>
+  </div>
 </header>
+
+<!-- Menú móvil -->
+
+@if (open()) {
+  <div class="fixed top-16 left-0 right-0 z-40 bg-base-100 shadow lg:hidden">
+    <ul class="menu w-full">
+      @for (section of sections; track section.id) {
+        <li>
+          <button
+            type="button"
+            (click)="navigateToSection(section.id)"
+            class="font-semibold text-slate-300 hover:text-cyan-400"
+          >
+            {{ section.label }}
+          </button>
+        </li>
+      }
+    </ul>
+  </div>
+}
