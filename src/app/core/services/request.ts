@@ -16,6 +16,8 @@ export interface ContactRequest {
   id?: string;
   userId: string;
   userEmail: string;
+  // Nombre del solicitante (opcional si se obtiene desde Auth)
+  userName?: string;
   developerSlug: string;
   projectDescription: string;
   status: 'Pendiente' | 'En proceso' | 'Respondida';

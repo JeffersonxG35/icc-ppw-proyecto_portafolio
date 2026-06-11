@@ -18,7 +18,7 @@ export class DeveloperProfilePage implements OnInit {
   private readonly router = inject(Router);
   private readonly strapiService = inject(StrapiService);
   private fb = inject(FormBuilder);
-  private authService = inject(AuthService);
+  readonly authService = inject(AuthService);
   private requestService = inject(RequestService);
 
   requestForm = this.fb.group({
@@ -28,6 +28,10 @@ export class DeveloperProfilePage implements OnInit {
   slug = computed(() => this.route.snapshot.paramMap.get('slug') || '');
 
   developer = this.strapiService.developerDetail;
+
+  getImageUrl(url?: string): string {
+    return this.strapiService.resolveImageUrl(url);
+  }
 
   ngOnInit(): void {
     const currentSlug = this.slug();
@@ -75,9 +79,13 @@ export class DeveloperProfilePage implements OnInit {
     }
 
     try {
+      const userName = user.displayName ?? user.email ?? '';
+
       await this.requestService.createRequest({
         userId: user.uid,
         userEmail: user.email ?? '',
+
+        userName,
         developerSlug: this.slug(),
         projectDescription: this.requestForm.value.projectDescription ?? '',
       });

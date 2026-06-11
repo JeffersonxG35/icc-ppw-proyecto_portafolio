@@ -20,7 +20,6 @@ export const routes: Routes = [
         (m) => m.DeveloperProfilePage,
       ),
   },
-  { path: '', component: HomePage },
 
   { path: 'auth', component: AuthPage },
   { path: 'mis-solicitudes', component: MyRequestsPage, canActivate: [authGuard] },

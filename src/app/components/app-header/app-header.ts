@@ -52,12 +52,26 @@ export class AppHeaderComponent {
 
   navigateToSection(sectionId: string) {
     this.closeMenu();
-    setTimeout(() => {
-      const element = document.getElementById(sectionId);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }
-    }, 100);
+    // Si ya estamos en la ruta raíz, solo desplazarse
+    if (this.router.url === '/' || this.router.url === '') {
+      setTimeout(() => {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+      return;
+    }
+
+    // Si no estamos en la ruta raíz, navegar primero y luego desplazar
+    this.router.navigate(['/']).then(() => {
+      setTimeout(() => {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 150);
+    });
   }
 
   handleScroll() {

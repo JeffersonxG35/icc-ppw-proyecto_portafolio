@@ -21,7 +21,7 @@
             tagline: developer()?.tagline,
             slug: slug(),
             photo: developer()?.photo?.[0]?.url
-              ? 'http://localhost:1337' + developer()?.photo[0].url
+              ? getImageUrl(developer()?.photo[0].url)
               : '/assets/' + developer()?.slug + '.png',
             contact: {
               github: developer()?.github,
@@ -182,7 +182,7 @@
             Información de contacto
           </h2>
           <p class="text-xs md:text-sm font-medium text-slate-900 max-w-sm leading-relaxed">
-            ¿Quieres trabajar conmigo? Escríbeme.
+            ¿Quieres trabajar conmigo? Escríbeme o envía una solicitud dirigida.
           </p>
 
           @if (developer()?.email) {
@@ -228,6 +228,53 @@
                 </svg>
                 Contáctame
               </a>
+            </div>
+
+            <!-- Formulario de solicitud dentro del perfil del desarrollador -->
+            <div class="mt-6">
+              @if (!authService.currentUser()) {
+                <p class="text-sm text-slate-200">Debes iniciar sesión para enviar una solicitud.</p>
+              } @else {
+                <div class="backdrop-blur-md bg-white/[0.02] border border-white/[0.05] p-6 rounded-2xl shadow-xl">
+                  <h3 class="text-lg font-bold text-white">Solicitar proyecto</h3>
+                  <p class="text-sm text-slate-300 mb-4">Envía una propuesta breve indicando la idea del proyecto. El desarrollador recibirá tu solicitud y podrá responderla desde su panel.</p>
+
+                  <form [formGroup]="requestForm" (ngSubmit)="submitRequest()" class="space-y-4">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div>
+                        <label class="block text-xs font-medium text-slate-300 mb-2">Nombre</label>
+                        <input type="text" [value]="authService.currentUser()?.displayName || authService.currentUser()?.email" disabled class="w-full px-3 py-2 rounded-lg bg-[#0f1422] border border-white/[0.04] text-white text-sm placeholder-slate-500 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400/20" />
+                      </div>
+                      <div>
+                        <label class="block text-xs font-medium text-slate-300 mb-2">Correo</label>
+                        <input type="email" [value]="authService.currentUser()?.email" disabled class="w-full px-3 py-2 rounded-lg bg-[#0f1422] border border-white/[0.04] text-white text-sm placeholder-slate-500 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400/20" />
+                      </div>
+                    </div>
+
+                    <div>
+                      <label class="block text-xs font-medium text-slate-300 mb-2">Programador</label>
+                      <div class="w-full px-3 py-2 rounded-lg bg-[#071026]/30 border border-cyan-400/10 text-cyan-200 text-sm flex items-center justify-between">
+                        <div>
+                          <div class="font-semibold text-white">{{ developer()?.name }}</div>
+                          <div class="text-xs text-slate-400">{{ developer()?.role }}</div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div>
+                      <label class="block text-xs font-medium text-slate-300 mb-2">Descripción del proyecto</label>
+                      <textarea formControlName="projectDescription" rows="4" class="w-full px-3 py-2 rounded-lg bg-[#0f1422] border border-white/[0.04] text-white text-sm placeholder-slate-500 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400/20" placeholder="Describe tu idea..."></textarea>
+                    </div>
+
+                    <div class="flex items-center gap-3">
+                      <button type="submit" class="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-cyan-500 to-sky-500 hover:from-cyan-600 hover:to-sky-600 text-slate-950 text-sm font-bold rounded-xl shadow-lg transition-all" [disabled]="requestForm.invalid">Enviar solicitud</button>
+                      @if (successMessage) {
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-300 text-sm font-medium">{{ successMessage }}</div>
+                      }
+                    </div>
+                  </form>
+                </div>
+              }
             </div>
           }
         </div>

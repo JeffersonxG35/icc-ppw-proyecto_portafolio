@@ -7,7 +7,7 @@ import { catchError, finalize, map, of, tap } from 'rxjs';
 })
 export class StrapiService {
   private readonly http = inject(HttpClient);
-  private readonly apiUrl = 'http://localhost:1337/api';
+  private readonly apiUrl = 'https://fabulous-angel-0c4e172105.strapiapp.com/api';
   
   // Signals para datos reactivos
   readonly servicios = signal<any[]>([]);
@@ -103,8 +103,14 @@ export class StrapiService {
 
   resolveImageUrl(url?: string): string {
     if (!url) return '/assets/default-image.jpg';
+    // Si la URL ya es absoluta, devolverla tal cual
     if (url.startsWith('http')) return url;
-    return `http://localhost:1337${url}`;
+    // Si la URL comienza con '/', asumir ruta relativa del servidor Strapi (autohosted)
+    if (url.startsWith('/')) {
+      return `https://fabulous-angel-0c4e172105.strapiapp.com${url}`;
+    }
+    // En caso contrario, devolver la cadena tal cual (posible URL ya formateada)
+    return url;
   }
   
 }

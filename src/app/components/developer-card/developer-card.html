@@ -43,6 +43,14 @@
               </svg>
               Contáctame
             </a>
+
+            <!-- Enlace para abrir el formulario de solicitud en el perfil del desarrollador -->
+            <a [routerLink]="['/developer', developer.slug]" fragment="contact" class="inline-flex items-center gap-2 px-4 py-2 bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/30 text-cyan-300 hover:text-white text-xs font-semibold rounded-xl transition-all no-underline">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-3.5 h-3.5">
+                <path d="M12 2a10 10 0 100 20 10 10 0 000-20zm1 10h4v2h-4v4h-2v-4H7v-2h4V8h2v4z"/>
+              </svg>
+              Enviar solicitud
+            </a>
           </div>
         </ng-container>
       </ng-template>

@@ -44,8 +44,8 @@ export class HomePage implements OnInit {
       role: dev.role,
       tagline: dev.tagline,
       slug: dev.slug,
-      photo: dev.photo && dev.photo.length > 0 && dev.photo[0]?.url 
-        ? `http://localhost:1337${dev.photo[0].url}` 
+      photo: dev.photo && dev.photo.length > 0 && dev.photo[0]?.url
+        ? this.strapiService.resolveImageUrl(dev.photo[0].url)
         : undefined,
       contact: dev.contact
     }));
@@ -69,14 +69,11 @@ export class HomePage implements OnInit {
   }
 
   submitContactForm() {
-    if (this.contactForm.name && this.contactForm.email && this.contactForm.message) {
-      console.log('Formulario enviado:', this.contactForm);
-      this.submitted = true;
-      this.contactForm = { name: '', email: '', message: '' };
-      setTimeout(() => {
-        this.submitted = false;
-      }, 3000);
-    }
+    // Adaptación: el formulario general redirige al usuario hacia la sección/flujo de solicitudes
+    // para evitar duplicidad. Indica al usuario que use el perfil del desarrollador para enviar
+    // una solicitud dirigida a un programador.
+    alert('Para enviar una solicitud selecciona el desarrollador desde la sección de Programadores y usa su formulario de solicitud. Debes estar autenticado.');
+    this.scrollToSection('proyectos');
   }
 
   getImageUrl(url?: string): string {
